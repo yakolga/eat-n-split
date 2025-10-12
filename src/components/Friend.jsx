@@ -1,3 +1,5 @@
+import Button from "./Button"
+
 export default function Friend({friend}) {
   return (
     <li key={friend.id}>
@@ -8,6 +10,7 @@ export default function Friend({friend}) {
       {friend.balance === 0 && <p>You and {friend.name} are even</p>}
       {friend.balance > 0 && <p className="green">{friend.name} owes you {friend.balance}$</p>}
 
+      <Button>Select</Button>
     </li>
   )
 }

@@ -1,4 +1,6 @@
 import FriendList from "./components/FriendList";
+import FormAddFriend from "./components/FormAddFriend";
+import Button from "./components/Button"
 
 const initialFriends = [
   {
@@ -26,6 +28,8 @@ export default function App() {
     <div className="app">
       <div className="sidebar">
         <FriendList friends={initialFriends}/>
+        <FormAddFriend/>
+        <Button>Add friend</Button>
       </div>
     </div>
   )
