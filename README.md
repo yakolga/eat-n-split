@@ -13,7 +13,7 @@ Eat-n-Split is a simple application designed to help groups split bills easily a
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/eat-n-split.git
+    git clone https://github.com/yakolga/eat-n-split.git
     ```
 2. Navigate to the project directory:
     ```bash
