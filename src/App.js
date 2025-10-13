@@ -45,6 +45,17 @@ export default function App() {
     setAddForm(false);
   }
 
+  function handleSplitBillForm(youPay, friendPay) {
+    setFriends(friends => 
+      friends.map(acc => acc.id === selectedFriend.id 
+        ? {...acc, balance: youPay 
+        ? acc.balance + youPay 
+        : friendPay 
+        ? acc.balance - friendPay : acc} 
+        : acc));
+    setSelectedFriend(null);
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
@@ -52,7 +63,7 @@ export default function App() {
         {addForm && <FormAddFriend onSubmit={handleAddFriend}/>}
         <Button onClick={toggleShowForm}>{addForm ? 'Close' : 'Add friend'}</Button>
       </div>
-      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend}/>}
+      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} onSubmit={handleSplitBillForm}/>}
     </div>
   )
 }
