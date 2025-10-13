@@ -1,4 +1,8 @@
 import FriendList from "./components/FriendList";
+import FormAddFriend from "./components/FormAddFriend";
+import Button from "./components/Button";
+import FormSplitBill from "./components/FormSplitBill";
+import { useState } from "react";
 
 const initialFriends = [
   {
@@ -22,11 +26,44 @@ const initialFriends = [
 ];
 
 export default function App() {
+  const [addForm, setAddForm] = useState(false);
+  const [friends, setFriends] = useState(initialFriends);
+  const [selectedFriend, setSelectedFriend] = useState(null);
+
+  function toggleShowForm() {
+    setAddForm(prev => !prev);
+    setSelectedFriend(null);
+  }
+
+  function handleAddFriend(friend) {
+    setFriends(friends => [...friends, friend]);
+    setAddForm(false);
+  }
+
+  function handleShowSplitForm(friend) {
+    setSelectedFriend((curr) => curr?.id === friend.id ? null : friend);
+    setAddForm(false);
+  }
+
+  function handleSplitBillForm(youPay, friendPay) {
+    setFriends(friends => 
+      friends.map(acc => acc.id === selectedFriend.id 
+        ? {...acc, balance: youPay 
+        ? acc.balance + youPay 
+        : friendPay 
+        ? acc.balance - friendPay : acc} 
+        : acc));
+    setSelectedFriend(null);
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
-        <FriendList friends={initialFriends}/>
+        <FriendList friends={friends} onClickButton={handleShowSplitForm} selectedFriend={selectedFriend}/>
+        {addForm && <FormAddFriend onSubmit={handleAddFriend}/>}
+        <Button onClick={toggleShowForm}>{addForm ? 'Close' : 'Add friend'}</Button>
       </div>
+      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} onSubmit={handleSplitBillForm}/>}
     </div>
   )
 }
