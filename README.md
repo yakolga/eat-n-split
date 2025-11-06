@@ -2,6 +2,8 @@
 
 Eat-n-Split is a simple application designed to help groups split bills easily and fairly. Whether you're dining out with friends or sharing expenses, this app ensures everyone pays their share.
 
+## [Live Demo](https://yakolga.github.io/eat-n-split/)
+
 ## Features
 
 - Add participants to a group.
